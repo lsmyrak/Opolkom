@@ -1,8 +1,11 @@
 ﻿using Contracts.Dtos;
+using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using WebAPI.Repositoryes;
+using WebAPI.Services;
 
 namespace WebAPI.Extentions
 {
@@ -45,12 +48,12 @@ namespace WebAPI.Extentions
         }
         public static void AddRepositories(this IServiceCollection services)
         {
-
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         public static void AddServices(this IServiceCollection services)
         {
-
+            services.AddScoped<IUserService, UserService>();
         }
 
         public static void AddOtherServices(this IServiceCollection services)

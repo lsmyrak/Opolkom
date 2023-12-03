@@ -28,7 +28,8 @@ builder.Services.AddAuthentication(option =>
     };
 });
 builder.Services.AddOtherServices();
-
+builder.Services.AddRepositories();
+builder.Services.AddServices();
 builder.Services.AddDbContext<DataContext>(options => options
   .UseNpgsql(builder.Configuration.GetConnectionString("PostgreSql")).UseSnakeCaseNamingConvention()
                 .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))

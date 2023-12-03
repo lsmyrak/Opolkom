@@ -1,8 +1,11 @@
-﻿using MediatR;
+﻿using Contracts.Dtos.User;
+using MediatR;
+using WebAPI.Repositoryes;
+using WebAPI.Services;
 
 namespace WebAPI.Queries
 {
-    public class GetUsersQuery : IRequest<IEnumerable<string>>
+    public class GetUsersQuery : IRequest<IEnumerable<UserDto>>
     {
         public GetUsersQuery()
         {
@@ -10,11 +13,16 @@ namespace WebAPI.Queries
         }
     }
 
-    public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, IEnumerable<string>>
+    public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, IEnumerable<UserDto>>
     {
-        public Task<IEnumerable<string>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+        private readonly IUserService _userService;
+        public GetUsersQueryHandler(IUserService userService)
         {
-            throw new NotImplementedException();
+            _userService = userService;
+        }
+        public async Task<IEnumerable<UserDto>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+        {
+            return await _userService.GetUsersDtoAsync();
         }
     }
 }

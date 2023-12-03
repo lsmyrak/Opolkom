@@ -29,11 +29,11 @@ public class DataContext : DbContext
             switch (entity.State)
             {
                 case EntityState.Added:
-                    entity.Entity.CreatedBy = _httpContextAccessor.HttpContext?.User
+                    entity.Entity.CreateBy = _httpContextAccessor.HttpContext?.User
                         .FindFirst(ClaimTypes.Email)?.Value ?? string.Empty;
-                    entity.Entity.CreatedDate = DateTime.UtcNow;
+                    entity.Entity.CreateDate = DateTime.UtcNow;
                     entity.Entity.IsActive = true;
-                    entity.Entity.UpdatedBy = string.Empty;
+                    entity.Entity.UpdateBy = string.Empty;
                     break;
 
                 case EntityState.Deleted:
@@ -42,9 +42,9 @@ public class DataContext : DbContext
                     break;
 
                 case EntityState.Modified:
-                    entity.Entity.UpdatedBy = _httpContextAccessor.HttpContext?.User
+                    entity.Entity.UpdateBy = _httpContextAccessor.HttpContext?.User
                         .FindFirst(ClaimTypes.Email)?.Value ?? string.Empty;
-                    entity.Entity.UpdatedDate = DateTime.UtcNow;
+                    entity.Entity.UpdateDate = DateTime.UtcNow;
                     break;
             }
         }
