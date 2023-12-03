@@ -1,9 +1,6 @@
 ﻿using Domain.Model;
-using Domain.Model.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
-using System.Runtime.CompilerServices;
 using System.Security.Claims;
 
 namespace Infrastructure.DataBase;

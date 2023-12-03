@@ -1,12 +1,8 @@
 ﻿using Contracts.Dtos;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace WebAPI.Extentions
 {
@@ -60,7 +56,7 @@ namespace WebAPI.Extentions
         public static void AddOtherServices(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Program));
-      
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<IPasswordHasher<RegisterUserDto>, PasswordHasher<RegisterUserDto>>();

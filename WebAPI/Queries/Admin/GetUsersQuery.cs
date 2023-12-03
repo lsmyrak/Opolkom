@@ -2,11 +2,11 @@
 
 namespace WebAPI.Queries
 {
-    public class GetUsersQuery:IRequest<IEnumerable<string>>
+    public class GetUsersQuery : IRequest<IEnumerable<string>>
     {
         public GetUsersQuery()
         {
-            
+
         }
     }
 

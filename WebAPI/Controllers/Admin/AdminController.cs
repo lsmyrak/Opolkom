@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Queries;
 
@@ -19,7 +18,7 @@ namespace WebAPI.Controllers.Admin
         }
 
         [HttpGet("get-users")]
-        public Task<IEnumerable<string>> GetUsers() 
+        public Task<IEnumerable<string>> GetUsers()
         {
             return _mediator.Send(new GetUsersQuery());
         }
