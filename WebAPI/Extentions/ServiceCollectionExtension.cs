@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace WebAPI.Extentions
 {
@@ -42,7 +45,7 @@ namespace WebAPI.Extentions
                             }, new string[] { }
                         }
                  });
-            });         
+            });
         }
         public static void AddRepositories(this IServiceCollection services)
         {
@@ -56,9 +59,13 @@ namespace WebAPI.Extentions
 
         public static void AddOtherServices(this IServiceCollection services)
         {
-           services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-           services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-           services.AddScoped<IPasswordHasher<RegisterUserDto>, PasswordHasher<RegisterUserDto>>();
+            services.AddAutoMapper(typeof(Program));
+      
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddScoped<IPasswordHasher<RegisterUserDto>, PasswordHasher<RegisterUserDto>>();
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+
         }
     }
 }

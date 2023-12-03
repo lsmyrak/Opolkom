@@ -1,16 +1,36 @@
+using Autofac.Core;
 using Infrastructure.DataBase;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using WebAPI;
 using WebAPI.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
 var authenticationSetting = new AuthenticationSetting();
 
-builder.Configuration.GetSection("AuthenticationSetting").Bind(authenticationSetting);
+builder.Configuration.GetSection("Authentication").Bind(authenticationSetting);
 builder.Services.AddSingleton(authenticationSetting);
+
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = "Bearer";
+    option.DefaultScheme = "Bearer";
+    option.DefaultChallengeScheme = "Bearer";
+}).AddJwtBearer(cfg =>
+{
+    cfg.RequireHttpsMetadata = false;
+    cfg.SaveToken = true;
+    cfg.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = authenticationSetting.JwtIssuer,
+        ValidAudience = authenticationSetting.JwtIssuer,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSetting.JwtKey))
+    };
+});
 builder.Services.AddOtherServices();
 
 builder.Services.AddDbContext<DataContext>(options => options

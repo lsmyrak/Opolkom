@@ -32,7 +32,7 @@ public class DataContext : DbContext
             switch (entity.State)
             {
                 case EntityState.Added:
-                    entity.Entity.CreatedBy = _httpContextAccessor.HttpContext.User
+                    entity.Entity.CreatedBy = _httpContextAccessor.HttpContext?.User
                         .FindFirst(ClaimTypes.Email)?.Value ?? string.Empty;
                     entity.Entity.CreatedDate = DateTime.UtcNow;
                     entity.Entity.IsActive = true;
@@ -45,7 +45,7 @@ public class DataContext : DbContext
                     break;
 
                 case EntityState.Modified:
-                    entity.Entity.UpdatedBy = _httpContextAccessor.HttpContext.User
+                    entity.Entity.UpdatedBy = _httpContextAccessor.HttpContext?.User
                         .FindFirst(ClaimTypes.Email)?.Value ?? string.Empty;
                     entity.Entity.UpdatedDate = DateTime.UtcNow;
                     break;
