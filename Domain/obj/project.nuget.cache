@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "e/vF50RJr1IcsUCxaRRVYlOAmKKXhI6xBkvUR6nqjFpHy/+WApDgd6G5nphThbaBix1DZHZhx01FB92cwATggQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Dev29A\\source\\repos\\Opolkom.TaskManager.WebAPI\\Domain\\Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Dev29A\\.nuget\\packages\\mediatr\\12.2.0\\mediatr.12.2.0.nupkg.sha512",
+    "C:\\Users\\Dev29A\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\Dev29A\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,13 @@
+C:\Users\Dev29A\source\repos\Opolkom.TaskManager.WebAPI\Domain\bin\Debug\net8.0\Domain.deps.json
+C:\Users\Dev29A\source\repos\Opolkom.TaskManager.WebAPI\Domain\bin\Debug\net8.0\Domain.dll
+C:\Users\Dev29A\source\repos\Opolkom.TaskManager.WebAPI\Domain\bin\Debug\net8.0\Domain.pdb
+C:\Users\Dev29A\source\repos\Opolkom.TaskManager.WebAPI\Domain\obj\Debug\net8.0\Domain.csproj.AssemblyReference.cache
+C:\Users\Dev29A\source\repos\Opolkom.TaskManager.WebAPI\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dev29A\source\repos\Opolkom.TaskManager.WebAPI\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
+C:\Users\Dev29A\source\repos\Opolkom.TaskManager.WebAPI\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
+C:\Users\Dev29A\source\repos\Opolkom.TaskManager.WebAPI\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+C:\Users\Dev29A\source\repos\Opolkom.TaskManager.WebAPI\Domain\obj\Debug\net8.0\Domain.sourcelink.json
+C:\Users\Dev29A\source\repos\Opolkom.TaskManager.WebAPI\Domain\obj\Debug\net8.0\Domain.dll
+C:\Users\Dev29A\source\repos\Opolkom.TaskManager.WebAPI\Domain\obj\Debug\net8.0\refint\Domain.dll
+C:\Users\Dev29A\source\repos\Opolkom.TaskManager.WebAPI\Domain\obj\Debug\net8.0\Domain.pdb
+C:\Users\Dev29A\source\repos\Opolkom.TaskManager.WebAPI\Domain\obj\Debug\net8.0\ref\Domain.dll
