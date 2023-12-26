@@ -1,4 +1,4 @@
-﻿namespace Contracts.Dtos
+﻿namespace Contracts.Dtos.User
 {
     public class RegisterUserDto
     {

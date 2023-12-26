@@ -4,6 +4,18 @@ namespace WebAPI.Repositoryes
 {
     public interface IUserRepository
     {
-        public Task<IEnumerable<User>> GetUserAsync();
+        // Gets..
+        public Task<IEnumerable<User>> GetUsersAsync();
+        public Task<IEnumerable<User>> GetUsersWithWorkAsync();
+        public Task<User> GetUserByEmailAsync(string email);
+        public Task<User> GetUserAsync(int id);
+        
+        //Delete
+        public Task<User> DeleteUserAsync(int id);
+
+        //Create
+
+        //Update
+        public Task UpdateUserAsync(User user);
     }
 }

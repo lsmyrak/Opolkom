@@ -1,5 +1,4 @@
-﻿using Contracts.Dtos;
-using FluentValidation;
+﻿using Contracts.Dtos.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.OpenApi.Models;
@@ -54,6 +53,7 @@ namespace WebAPI.Extentions
         public static void AddServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAccountService, AccountService>();
         }
 
         public static void AddOtherServices(this IServiceCollection services)
@@ -62,7 +62,7 @@ namespace WebAPI.Extentions
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            services.AddScoped<IPasswordHasher<RegisterUserDto>, PasswordHasher<RegisterUserDto>>();
+            services.AddScoped<IPasswordHasher<UserDto>, PasswordHasher<UserDto>>();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
         }

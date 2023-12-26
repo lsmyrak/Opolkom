@@ -1,6 +1,5 @@
 ﻿using Contracts.Dtos.User;
 using MediatR;
-using WebAPI.Repositoryes;
 using WebAPI.Services;
 
 namespace WebAPI.Queries
