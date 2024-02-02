@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Contracts.Dtos.User;
+using Domain.Model;
+using Domain.Model.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,16 +17,19 @@ namespace WebAPI.Services
         private readonly IMapper _mapper;
         private readonly AuthenticationSetting _authenticationSetting;
         private readonly IPasswordHasher<UserDto> _passwordHasher;
+        private readonly IRoleRepository _roleRepository;
         public AccountService(
             IUserRepository userRepository,
             IMapper mapper,
             IPasswordHasher<UserDto> passwordHasher,
-            AuthenticationSetting authenticationSetting)
+            AuthenticationSetting authenticationSetting,
+            IRoleRepository roleRepository)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _authenticationSetting = authenticationSetting;
             _passwordHasher = passwordHasher;
+            _roleRepository = roleRepository;
         }
 
         public async Task<string> LoginAsync(LoginDto loginDto)
@@ -65,9 +70,20 @@ namespace WebAPI.Services
             throw new NotImplementedException();
         }
 
-        public Task RegisterAsync(RegisterUserDto registerUserDto)
+        public async Task RegisterAsync(RegisterUserDto registerUserDto)
         {
-            throw new NotImplementedException();
+            registerUserDto.Email = registerUserDto.Email.ToUpper();
+            if (await _userRepository.GetUserByEmailAsync(registerUserDto.Email) != null)
+            {
+                throw new BadHttpRequestException("User Exist");
+            }
+            var userDto = _mapper.Map<UserDto>(registerUserDto);
+            var hashPassword = _passwordHasher.HashPassword(userDto, userDto.Password);
+            registerUserDto.Password = hashPassword;
+            var user = _mapper.Map<User>(registerUserDto);
+            var role = await _roleRepository.GetRoleByNameAsync(Roles.Guest.ToString());
+            user.UserRole = role;
+            await _userRepository.CreateUserAsync(user);
         }
 
         public async Task UnregisterAsync(int id)

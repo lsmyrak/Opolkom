@@ -8,14 +8,16 @@ namespace WebAPI.Repositoryes
         public Task<IEnumerable<User>> GetUsersAsync();
         public Task<IEnumerable<User>> GetUsersWithWorkAsync();
         public Task<User> GetUserByEmailAsync(string email);
-        public Task<User> GetUserAsync(int id);
-        
+        public Task<User> GetUserWithWorkAsync(int id);
+
         //Delete
         public Task<User> DeleteUserAsync(int id);
 
-        //Create
-
         //Update
-        public Task UpdateUserAsync(User user);
+        public Task UpdateDataUser(User user);
+
+        //Create
+        public Task CreateUserAsync(User user);
+
     }
 }

@@ -2,6 +2,7 @@
 using Contracts.Dtos.Task;
 using Contracts.Dtos.User;
 using Domain.Model;
+using Domain.Model.Enums;
 using System.Security.Claims;
 using WebAPI.Repositoryes;
 
@@ -13,7 +14,7 @@ namespace WebAPI.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
         public UserService(
-            IUserRepository userRepository, 
+            IUserRepository userRepository,
             IMapper mapper,
             IHttpContextAccessor httpContextAccessor)
         {
@@ -30,14 +31,14 @@ namespace WebAPI.Services
 
         public async Task<UserDto> GetUserByIdAsync(int id)
         {
-            var user = await _userRepository.GetUserAsync(id);
+            var user = await _userRepository.GetUserWithWorkAsync(id);
             return _mapper.Map<UserDto>(user);
 
         }
 
         public async Task<UserWorkDto> GetUserTasksByIdAsync(int id)
         {
-            var user = await _userRepository.GetUserAsync(id);
+            var user = await _userRepository.GetUserWithWorkAsync(id);
             var userTaskDto = _mapper.Map<UserWorkDto>(user);
             userTaskDto.WorkListDto.Calc();
             return userTaskDto;
@@ -58,12 +59,71 @@ namespace WebAPI.Services
 
         public async Task AddWorkToUser(WorkDto workDto)
         {
-            var  userId = Convert.ToInt32((_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value)); 
+            var userId = Convert.ToInt32((_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value));
 
-            var user = await _userRepository.GetUserAsync(userId);
+            var user = await _userRepository.GetUserWithWorkAsync(userId);
             var work = _mapper.Map<Work>(workDto);
             user.AddWork(work);
-            await _userRepository.UpdateUserAsync(user);
+            await _userRepository.UpdateDataUser(user);
+        }
+
+        public async Task DeleteWork(int idWork)
+        {
+
+            var role = ((_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Role).Value));
+            if (role.Equals(Roles.Admin.ToString()))
+            {
+                var u = await _userRepository.GetUsersWithWorkAsync();
+                var userUpdates = u.FirstOrDefault(x => x.Works.Any(c => c.Id == idWork));
+                if (userUpdates != null)
+                {
+                    userUpdates.RemoveWork(userUpdates.Works.FirstOrDefault(x => x.Id == idWork));
+                    await _userRepository.UpdateDataUser(userUpdates);
+                }
+            }
+            else
+            {
+                var userId = Convert.ToInt32((_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value));
+
+                var user = await (_userRepository.GetUserWithWorkAsync(userId));
+                if (user != null)
+                {
+                    user.RemoveWork(user.Works.FirstOrDefault(x => x.Id == idWork));
+                    await _userRepository.UpdateDataUser(user);
+                }
+            }
+        }
+
+        public async Task UpdateWork(WorkDto workDto)
+        {
+            var userRole = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Role).Value;
+            if (userRole != null && userRole.Equals(Roles.Admin))
+            {
+                var u = await _userRepository.GetUsersWithWorkAsync();
+                if (u != null)
+                {
+                    var userUpdates = u.FirstOrDefault(x => x.Works.Any(c => c.Id == workDto.Id));
+                    if (userUpdates != null)
+                    {
+                        var work = _mapper.Map<Work>(workDto);
+                        userUpdates.UpdateWork(work);
+                        await _userRepository.UpdateDataUser(userUpdates);
+
+                    }
+                }
+            }
+            else
+            {
+                var userId = Convert.ToInt32((_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value));
+
+                var user = await (_userRepository.GetUserWithWorkAsync(userId));
+                if (user != null)
+                {
+                    var work = _mapper.Map<Work>(workDto);
+                    user.UpdateWork(work);
+                    await _userRepository.UpdateDataUser(user);
+                }
+            }
         }
     }
 }

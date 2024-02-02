@@ -15,6 +15,8 @@ namespace WebAPI.Mappers
 
             CreateMap<UserDto, RegisterUserDto>();
             CreateMap<RegisterUserDto, UserDto>();
+            CreateMap<RegisterUserDto, User>();
+            CreateMap<User, RegisterUserDto>();
 
             CreateMap<Role, RoleDto>();
             CreateMap<RoleDto, Role>();

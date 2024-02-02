@@ -12,5 +12,6 @@ namespace Domain.Model
         public User User { get; set; }
         public int UserId { get; set; }
         public decimal Price { get; set; }
+        public bool Settled { get; set; }
     }
 }

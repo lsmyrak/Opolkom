@@ -5,7 +5,7 @@ using WebAPI.Services;
 
 namespace WebAPI.Queries;
 
-public class GetUserWorkQuery:IRequest<UserWorkDto>
+public class GetUserWorkQuery : IRequest<UserWorkDto>
 {
 
 }
@@ -18,12 +18,12 @@ public class GetUserWorkQueryHandler : IRequestHandler<GetUserWorkQuery, UserWor
     {
         _userService = userService;
         _httpContextAccessor = httpContextAccessor;
-        
+
     }
-    public  async Task<UserWorkDto> Handle(GetUserWorkQuery request, CancellationToken cancellationToken)
+    public async Task<UserWorkDto> Handle(GetUserWorkQuery request, CancellationToken cancellationToken)
     {
         var idUser = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        if (idUser != null) 
+        if (idUser != null)
         {
             return await _userService.GetUserTasksByIdAsync(Convert.ToInt32(idUser));
         }

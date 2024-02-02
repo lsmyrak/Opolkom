@@ -27,5 +27,18 @@
         {
             Works.Clear();
         }
+        public void UpdateWork(Work work)
+        {
+            var workUpdate = Works.SingleOrDefault(x => x.Id == work.Id);
+            if (workUpdate != null)
+            {
+                workUpdate.Tasks = work.Tasks;
+                workUpdate.Place = work.Place;
+                workUpdate.DateOfWork = work.DateOfWork;
+                workUpdate.DateOfNote = work.DateOfNote;
+                workUpdate.KindOfWork = work.KindOfWork;
+                workUpdate.Price = work.Price;
+            }
+        }
     }
 }

@@ -20,9 +20,8 @@ public class UnregisterCommandHandler : IRequestHandler<UnregisterCommand>
         _accountService = accountService;
     }
 
-    public Task Handle(UnregisterCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UnregisterCommand request, CancellationToken cancellationToken)
     {
-        _accountService.UnregisterAsync(request.Id);
-        return Task.CompletedTask;
+        await _accountService.UnregisterAsync(request.Id);
     }
 }

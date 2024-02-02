@@ -14,7 +14,7 @@ namespace WebAPI.Controllers.User;
 public class UserController : ControllerBase
 {
     private readonly IMediator _mediator;
-    
+
     public UserController(IMediator mediator)
     {
         _mediator = mediator;
@@ -35,7 +35,18 @@ public class UserController : ControllerBase
     [HttpPost("add-task")]
     public async Task AddTak(WorkDto workDto)
     {
-      await  _mediator.Send(new AddWorkToUserCommand(workDto));
+        await _mediator.Send(new AddWorkToUserCommand(workDto));
+    }
+
+    [HttpDelete("delete/{idWork}")]
+    public async Task DeleteTask(int idWork)
+    {
+        await _mediator.Send(new RemoveTaskUserCommand(idWork));
+    }
+
+    [HttpPatch("edit-task")]
+    public async Task UpdateTask(WorkDto workDto)
+    {
+        await _mediator.Send(new UpdateTaskUserCommand(workDto));
     }
 }
- 

@@ -1,14 +1,12 @@
 ﻿using Contracts.Dtos.Task;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using WebAPI.Services;
 
 namespace WebAPI.Command;
 
-public class AddWorkToUserCommand:IRequest
+public class AddWorkToUserCommand : IRequest
 {
-    public WorkDto  _workDto { get; set; }
+    public WorkDto _workDto { get; set; }
     public AddWorkToUserCommand(WorkDto workDto)
     {
         _workDto = workDto;

@@ -1,4 +1,7 @@
 ﻿using Contracts.Dtos.User;
+using Contracts.Dtos.User.Validators;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.OpenApi.Models;
@@ -48,6 +51,7 @@ namespace WebAPI.Extentions
         public static void AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
         }
 
         public static void AddServices(this IServiceCollection services)
@@ -59,6 +63,10 @@ namespace WebAPI.Extentions
         public static void AddOtherServices(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Program));
+
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<RegisterValodator>();
+
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();

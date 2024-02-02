@@ -15,7 +15,13 @@ namespace WebAPI.Services
         public Task<IEnumerable<UserWorkDto>> GetUsersWorksAsync();
 
         //Add Work
-
         public Task AddWorkToUser(WorkDto workDto);
+
+        //Delete Work 
+        public Task DeleteWork(int idWork);
+
+        //Update Work
+
+        public Task UpdateWork(WorkDto workDto);
     }
 }

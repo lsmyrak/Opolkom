@@ -18,7 +18,14 @@ public class AccountController : ControllerBase
     [HttpPost("register")]
     public async Task Register(RegisterUserDto registerUserDto)
     {
-        await _mediator.Send(new RegisterUserCommand(registerUserDto));
+        if (ModelState.IsValid)
+        {
+            await _mediator.Send(new RegisterUserCommand(registerUserDto));
+        }
+        else
+        {
+            BadRequest(ModelState);
+        }
     }
 
     [HttpPost("login")]

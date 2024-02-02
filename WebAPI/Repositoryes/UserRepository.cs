@@ -26,9 +26,9 @@ namespace WebAPI.Repositoryes
             return user;
         }
 
-        public async Task<User> GetUserAsync(int id)
+        public async Task<User> GetUserWithWorkAsync(int id)
         {
-            return await _context.Users.Include(r => r.UserRole).Include(w => w.Works).Where(x => x.IsActive).SingleAsync(x => x.Id == id);
+            return await _context.Users.Include(r => r.UserRole).Include(w => w.Works.Where(a => a.IsActive)).Where(x => x.IsActive).SingleAsync(x => x.Id == id);
         }
 
         public async Task<User> DeleteUserAsync(int id)
@@ -46,12 +46,18 @@ namespace WebAPI.Repositoryes
 
         public async Task<IEnumerable<User>> GetUsersWithWorkAsync()
         {
-            return await _context.Users.Include(w => w.Works).Where(x => x.IsActive).ToListAsync();
+            return await _context.Users.Include(w => w.Works.Where(a => a.IsActive)).Where(x => x.IsActive).ToListAsync();
         }
 
-        public async Task UpdateUserAsync(User user)
+        public async Task UpdateDataUser(User user)
         {
             _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task CreateUserAsync(User user)
+        {
+            await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
         }
     }

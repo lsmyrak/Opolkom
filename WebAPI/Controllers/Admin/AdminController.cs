@@ -1,4 +1,5 @@
-﻿using Contracts.Dtos.User;
+﻿using Contracts.Dtos.Task;
+using Contracts.Dtos.User;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,14 @@ namespace WebAPI.Controllers.Admin
         {
             _mediator = mediator;
         }
+
+        /*
+        //[HttpPost("settled-by-user/{idUser}")]
+        rozlicz by user (calosc)
+        rozlicz by zadanie
+        rozlicz by miesiac
+         */
+
         [HttpPost("unregister/{idUser}")]
         public async Task Unregister(int idUser)
         {
@@ -49,5 +58,18 @@ namespace WebAPI.Controllers.Admin
         {
             return await _mediator.Send(new GetUsersTaskQuery());
         }
+
+        [HttpPatch("/edit-task")]
+        public async Task EditTaskUser(WorkDto workdto)
+        {
+            await _mediator.Send(new UpdateTaskCommand(workdto));
+        }
+
+        [HttpDelete("/delete-task/{idTask}")]
+        public async Task DeleteTask(int idTask)
+        {
+            await _mediator.Send(new DeleteTaskCommand(idTask));
+        }
+
     }
 }

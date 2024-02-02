@@ -17,7 +17,8 @@ namespace WebAPI.Extentions
                     KindOfWork = work.KindOfWork,
                     Place = work.Place,
                     Price = work.Price,
-                    Tasks = work.Tasks
+                    Tasks = work.Tasks,
+                    Settled = work.Settled,
                 };
             }
             return null;

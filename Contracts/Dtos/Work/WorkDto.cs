@@ -11,5 +11,6 @@ namespace Contracts.Dtos.Task
         public KindOfWork KindOfWork { get; set; }
         public string Tasks { get; set; }
         public decimal Price { get; set; }
+        public bool Settled { get; set; }
     }
 }
