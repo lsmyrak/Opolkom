@@ -9,7 +9,7 @@ public class RegisterValodator : AbstractValidator<RegisterUserDto>
         RuleFor(c => c.FirstName).NotEmpty().Length(2, 100).NotEqual("-");
         RuleFor(c => c.LastName).NotEmpty().Length(2, 100).NotEqual("-");
         RuleFor(c => c.Email).EmailAddress();
-        RuleFor(c=>c.Password).MinimumLength(13).Equal(c=>c.ConfirmPassword);
+        RuleFor(c => c.Password).MinimumLength(13).Equal(c => c.ConfirmPassword);
         RuleFor(c => c.ConfirmPassword).MinimumLength(13).Equal(c => c.Password);
     }
 }

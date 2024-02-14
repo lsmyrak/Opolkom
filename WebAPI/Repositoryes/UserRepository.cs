@@ -60,5 +60,10 @@ namespace WebAPI.Repositoryes
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<User> GetUserById(int id)
+        {
+            return await _context.Users.Include(p => p.Works.Where(c => c.IsActive)).SingleOrDefaultAsync(x => x.Id == id && x.IsActive);
+        }
     }
 }

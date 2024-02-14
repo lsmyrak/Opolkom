@@ -10,6 +10,8 @@ namespace WebAPI.Repositoryes
         public Task<User> GetUserByEmailAsync(string email);
         public Task<User> GetUserWithWorkAsync(int id);
 
+        public Task<User> GetUserById(int id);
+
         //Delete
         public Task<User> DeleteUserAsync(int id);
 

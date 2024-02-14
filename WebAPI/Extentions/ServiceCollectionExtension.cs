@@ -58,6 +58,7 @@ namespace WebAPI.Extentions
         {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IWorkService, WorkService>();
         }
 
         public static void AddOtherServices(this IServiceCollection services)

@@ -22,8 +22,8 @@ public class UpdateTaskCommandHandler : IRequestHandler<UpdateTaskCommand>
     {
         _userService = userService;
     }
-    public Task Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await _userService.UpdateWork(request._workDto);
     }
 }

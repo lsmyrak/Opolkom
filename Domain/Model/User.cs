@@ -14,7 +14,10 @@
         {
             Works = new List<Work>();
         }
-
+        /// <summary>
+        /// work Section
+        /// </summary>
+        /// <param name="work"></param>
         public void AddWork(Work work)
         {
             Works.Add(work);
@@ -38,6 +41,14 @@
                 workUpdate.DateOfNote = work.DateOfNote;
                 workUpdate.KindOfWork = work.KindOfWork;
                 workUpdate.Price = work.Price;
+            }
+        }
+        public void Settlement(int idWork)
+        {
+            var work = Works.FirstOrDefault(x => x.Id == idWork);
+            if (work != null)
+            {
+                work.Settled = true;
             }
         }
     }

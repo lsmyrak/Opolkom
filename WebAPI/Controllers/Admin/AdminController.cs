@@ -20,12 +20,6 @@ namespace WebAPI.Controllers.Admin
             _mediator = mediator;
         }
 
-        /*
-        //[HttpPost("settled-by-user/{idUser}")]
-        rozlicz by user (calosc)
-        rozlicz by zadanie
-        rozlicz by miesiac
-         */
 
         [HttpPost("unregister/{idUser}")]
         public async Task Unregister(int idUser)
@@ -51,8 +45,6 @@ namespace WebAPI.Controllers.Admin
             return await _mediator.Send(new GetUserTasksById(idUser));
         }
 
-
-
         [HttpGet("get-users-with-task")]
         public async Task<IEnumerable<UserWorkDto>> GetUsersWorkDtosAsync()
         {
@@ -70,6 +62,13 @@ namespace WebAPI.Controllers.Admin
         {
             await _mediator.Send(new DeleteTaskCommand(idTask));
         }
+
+        /*
+             //[HttpPost("settled-by-user/{idUser}")]
+             rozlicz by user (calosc)
+             rozlicz by zadanie
+             rozlicz by miesiac
+              */
 
     }
 }

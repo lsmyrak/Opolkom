@@ -1,7 +1,7 @@
 ﻿using Contracts.Dtos.Task;
 using Domain.Model;
 
-namespace WebAPI.Extentions
+namespace WebAPI.Mappers
 {
     public static class ManualMappingExtention
     {
