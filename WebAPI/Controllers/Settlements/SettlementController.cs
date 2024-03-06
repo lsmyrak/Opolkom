@@ -33,5 +33,10 @@ namespace WebAPI.Controllers.Settlements
         {
             await _mediator.Send(new SettlementByMonthCommand(idUser, month));
         }
+        [HttpPatch("by-id/{idUser}")]
+        public async Task Settlemnet(int idUser)
+        {
+            await _mediator.Send(new SettlementByIdUserCommand(idUser));
+        }
     }
 }

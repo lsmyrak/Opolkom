@@ -63,12 +63,6 @@ namespace WebAPI.Controllers.Admin
             await _mediator.Send(new DeleteTaskCommand(idTask));
         }
 
-        /*
-             //[HttpPost("settled-by-user/{idUser}")]
-             rozlicz by user (calosc)
-             rozlicz by zadanie
-             rozlicz by miesiac
-              */
 
     }
 }

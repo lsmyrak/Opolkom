@@ -41,9 +41,17 @@ namespace WebAPI.Services
             throw new NotImplementedException();
         }
 
-        public Task SettlementByUser(int IdUser)
+        public async Task SettlementByUser(int IdUser)
         {
-            throw new NotImplementedException();
+            var user = await _userRepository.GetUserById(IdUser);
+            if (user != null) 
+            {
+                foreach(var work in user.Works) 
+                {
+                    user.Settlement(work.Id);
+                }
+                await _userRepository.UpdateDataUser(user);
+            }
         }
     }
 }
