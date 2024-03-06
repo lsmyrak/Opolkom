@@ -21,7 +21,7 @@ namespace WebAPI.Command
         }
         public async Task Handle(SettlementByIdUserCommand request, CancellationToken cancellationToken)
         {
-            await _woService.SettlementByUser(request.IdUser);
+            await _woService.Settlement(request.IdUser);
         }
     }
 }

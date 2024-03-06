@@ -25,7 +25,7 @@ namespace WebAPI.Command
 
         public async Task Handle(SettlementByMonthCommand request, CancellationToken cancellationToken)
         {
-            await _workService.SettlementbyMonth(request.IdUser, request.Month);
+            await _workService.Settlement(request.IdUser, request.Month);
         }
     }
 }

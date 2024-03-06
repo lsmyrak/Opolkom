@@ -23,7 +23,7 @@ namespace WebAPI.Queries
 
         public async Task<UserWorkDto> Handle(GetUserTasksById request, CancellationToken cancellationToken)
         {
-            return await _userService.GetUserTasksByIdAsync(request.Id);
+            return await _userService.GetUserDtoWithWorksAsync(request.Id);
         }
     }
 }

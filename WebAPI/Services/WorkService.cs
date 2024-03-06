@@ -13,7 +13,7 @@ namespace WebAPI.Services
             _userRepository = userRepository;
             _mapper = mapper;
         }
-        public async Task SettlementByIdWork(int idUser, int IdWork)
+        public async Task Settlement(int idUser, int IdWork)
         {
             var user = await _userRepository.GetUserById(idUser);
             if (user != null)
@@ -23,7 +23,7 @@ namespace WebAPI.Services
             }
         }
 
-        public async Task SettlementbyMonth(int idUser, DateOnly month)
+        public async Task Settlement(int idUser, DateOnly month)
         {
             var user = await _userRepository.GetUserById(idUser);
             if (user != null)
@@ -36,12 +36,12 @@ namespace WebAPI.Services
             }
         }
 
-        public Task SettlementByScopeDate(int IdUser, DateOnly startDate, DateOnly stopDate)
+        public Task Settlement(int IdUser, DateOnly startDate, DateOnly stopDate)
         {
             throw new NotImplementedException();
         }
 
-        public async Task SettlementByUser(int IdUser)
+        public async Task Settlement(int IdUser)
         {
             var user = await _userRepository.GetUserById(IdUser);
             if (user != null) 

@@ -20,6 +20,6 @@ public class GetUsersTaskQueryHandler : IRequestHandler<GetUsersTaskQuery, IEnum
     }
     public async Task<IEnumerable<UserWorkDto>> Handle(GetUsersTaskQuery request, CancellationToken cancellationToken)
     {
-        return await _userService.GetUsersWorksAsync();
+        return await _userService.GetUsersWithWorksAsync();
     }
 }

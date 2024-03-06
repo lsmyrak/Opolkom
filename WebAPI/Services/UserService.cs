@@ -29,14 +29,14 @@ namespace WebAPI.Services
             return users.Select(x => _mapper.Map<UserDto>(x));
         }
 
-        public async Task<UserDto> GetUserByIdAsync(int id)
+        public async Task<UserDto> GetUserDto(int id)
         {
             var user = await _userRepository.GetUserWithWorkAsync(id);
             return _mapper.Map<UserDto>(user);
 
         }
 
-        public async Task<UserWorkDto> GetUserTasksByIdAsync(int id)
+        public async Task<UserWorkDto> GetUserDtoWithWorksAsync(int id)
         {
             var user = await _userRepository.GetUserWithWorkAsync(id);
             var userTaskDto = _mapper.Map<UserWorkDto>(user);
@@ -44,7 +44,7 @@ namespace WebAPI.Services
             return userTaskDto;
         }
 
-        public async Task<IEnumerable<UserWorkDto>> GetUsersWorksAsync()
+        public async Task<IEnumerable<UserWorkDto>> GetUsersWithWorksAsync()
         {
             var users = await _userRepository.GetUsersWithWorkAsync();
             var usersTaskDto = users.Select(x => _mapper.Map<UserWorkDto>(x));

@@ -2,9 +2,9 @@
 {
     public interface IWorkService
     {
-        public Task SettlementByUser(int IdUser);
-        public Task SettlementByIdWork(int idUser, int IdWork);
-        public Task SettlementByScopeDate(int IdUser, DateOnly startDate, DateOnly stopDate);
-        public Task SettlementbyMonth(int idUser, DateOnly month);
+        public Task Settlement(int IdUser);
+        public Task Settlement(int idUser, int IdWork);
+        public Task Settlement(int IdUser, DateOnly startDate, DateOnly stopDate);
+        public Task Settlement(int idUser, DateOnly month);
     }
 }

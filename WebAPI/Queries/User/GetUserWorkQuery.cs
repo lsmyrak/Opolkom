@@ -25,7 +25,7 @@ public class GetUserWorkQueryHandler : IRequestHandler<GetUserWorkQuery, UserWor
         var idUser = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         if (idUser != null)
         {
-            return await _userService.GetUserTasksByIdAsync(Convert.ToInt32(idUser));
+            return await _userService.GetUserDtoWithWorksAsync(Convert.ToInt32(idUser));
         }
         return null;
     }

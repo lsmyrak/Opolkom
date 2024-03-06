@@ -27,7 +27,7 @@ public class GetSelfUserOnlyCalcQueryHandler : IRequestHandler<GetSelfUserOnlyCa
         string idUser = _httpContextAcessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         if (idUser != null)
         {
-            var userWorkDto = await _userService.GetUserTasksByIdAsync(Convert.ToInt32(idUser));
+            var userWorkDto = await _userService.GetUserDtoWithWorksAsync(Convert.ToInt32(idUser));
             var retVal = _mapper.Map<UserWorkOnlyCalcDto>(userWorkDto);
             return retVal;
         }

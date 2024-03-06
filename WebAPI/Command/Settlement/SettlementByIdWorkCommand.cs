@@ -23,7 +23,7 @@ namespace WebAPI.Command
         }
         public async Task Handle(SettlementByIdWorkCommand request, CancellationToken cancellationToken)
         {
-            await _workService.SettlementByIdWork(request.IdUser, request.IdWork);
+            await _workService.Settlement(request.IdUser, request.IdWork);
         }
     }
 }
