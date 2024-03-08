@@ -31,6 +31,11 @@ public class AccountController : ControllerBase
     [HttpPost("login")]
     public async Task<string> Login(LoginDto loginDto)
     {
-        return await _mediator.Send(new LoginCommand(loginDto));
+        if (ModelState.IsValid)
+        {
+
+            return await _mediator.Send(new LoginCommand(loginDto));
+        }
+         return  ModelState.ToString();
     }
 }

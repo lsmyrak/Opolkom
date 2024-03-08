@@ -7,11 +7,9 @@ namespace WebAPI.Services
     public class WorkService : IWorkService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IMapper _mapper;
-        public WorkService(IUserRepository userRepository, IMapper mapper)
+        public WorkService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _mapper = mapper;
         }
         public async Task Settlement(int idUser, int IdWork)
         {
@@ -36,9 +34,15 @@ namespace WebAPI.Services
             }
         }
 
-        public Task Settlement(int IdUser, DateOnly startDate, DateOnly stopDate)
+        public async Task Settlement(int IdUser, DateOnly startDate, DateOnly stopDate)
         {
-            throw new NotImplementedException();
+            var user = await _userRepository.GetUserWithWorkAsync(IdUser);
+            var works = user.Works.Where(x => x.DateOfWork >= startDate && x.DateOfWork < stopDate);
+            foreach (var work in works)
+            { 
+                user.Settlement(work.Id);
+            }
+            await _userRepository.UpdateDataUser(user);
         }
 
         public async Task Settlement(int IdUser)
