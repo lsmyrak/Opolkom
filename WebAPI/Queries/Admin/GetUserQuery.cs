@@ -23,6 +23,6 @@ public class GetUserQueryHander : IRequestHandler<GetUserQuery, UserDto>
     }
     public async Task<UserDto> Handle(GetUserQuery request, CancellationToken cancellationToken)
     {
-        return await _userService.GetUserDto(request.Id);
+        return await _userService.GetUserDtoAsync(request.Id);
     }
 }
