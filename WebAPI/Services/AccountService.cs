@@ -35,7 +35,7 @@ namespace WebAPI.Services
         public async Task<string> LoginAsync(LoginDto loginDto)
         {
             loginDto.Email = loginDto.Email.ToUpper();
-            var user = await _userRepository.GetUserByEmailAsync(loginDto.Email) ?? throw new BadHttpRequestException("Invalid username or password");
+            var user = await _userRepository.GetUserAsync(loginDto.Email) ?? throw new BadHttpRequestException("Invalid username or password");
             var userDto = _mapper.Map<UserDto>(user);
             var result = _passwordHasher.VerifyHashedPassword(userDto, userDto.Password, loginDto.Password);
             if (result == PasswordVerificationResult.Failed)
@@ -73,7 +73,7 @@ namespace WebAPI.Services
         public async Task RegisterAsync(RegisterUserDto registerUserDto)
         {
             registerUserDto.Email = registerUserDto.Email.ToUpper();
-            if (await _userRepository.GetUserByEmailAsync(registerUserDto.Email) != null)
+            if (await _userRepository.GetUserAsync(registerUserDto.Email) != null)
             {
                 throw new BadHttpRequestException("User Exist");
             }
@@ -81,7 +81,7 @@ namespace WebAPI.Services
             var hashPassword = _passwordHasher.HashPassword(userDto, userDto.Password);
             registerUserDto.Password = hashPassword;
             var user = _mapper.Map<User>(registerUserDto);
-            var role = await _roleRepository.GetRoleByNameAsync(Roles.Guest.ToString());
+            var role = await _roleRepository.GetRole(Roles.Guest.ToString());
             user.UserRole = role;
             await _userRepository.CreateUserAsync(user);
         }

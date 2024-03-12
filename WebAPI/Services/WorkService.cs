@@ -11,9 +11,9 @@ namespace WebAPI.Services
         {
             _userRepository = userRepository;
         }
-        public async Task Settlement(int idUser, int IdWork)
+        public async Task SettlementAsync(int idUser, int IdWork)
         {
-            var user = await _userRepository.GetUserById(idUser);
+            var user = await _userRepository.GetUserAsync(idUser);
             if (user != null)
             {
                 user.Settlement(IdWork);
@@ -21,9 +21,9 @@ namespace WebAPI.Services
             }
         }
 
-        public async Task Settlement(int idUser, DateOnly month)
+        public async Task SettlementAsync(int idUser, DateOnly month)
         {
-            var user = await _userRepository.GetUserById(idUser);
+            var user = await _userRepository.GetUserAsync(idUser);
             if (user != null)
             {
                 foreach (var work in user.Works.Where(c => c.DateOfWork.Month == month.Month))
@@ -34,7 +34,7 @@ namespace WebAPI.Services
             }
         }
 
-        public async Task Settlement(int IdUser, DateOnly startDate, DateOnly stopDate)
+        public async Task SettlementAsync(int IdUser, DateOnly startDate, DateOnly stopDate)
         {
             var user = await _userRepository.GetUserWithWorkAsync(IdUser);
             var works = user.Works.Where(x => x.DateOfWork >= startDate && x.DateOfWork < stopDate);
@@ -45,9 +45,9 @@ namespace WebAPI.Services
             await _userRepository.UpdateDataUser(user);
         }
 
-        public async Task Settlement(int IdUser)
+        public async Task SettlementAsync(int IdUser)
         {
-            var user = await _userRepository.GetUserById(IdUser);
+            var user = await _userRepository.GetUserAsync(IdUser);
             if (user != null) 
             {
                 foreach(var work in user.Works) 

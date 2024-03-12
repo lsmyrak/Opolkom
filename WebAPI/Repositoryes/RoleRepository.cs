@@ -13,7 +13,7 @@ namespace WebAPI.Repositoryes
         {
             _context = dataContext;
         }
-        public async Task<Role> GetRoleByNameAsync(string roleName)
+        public async Task<Role> GetRole(string roleName)
         {
             return await _context.Roles.SingleOrDefaultAsync(x => x.Name.Equals(roleName));
         }

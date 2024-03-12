@@ -29,7 +29,7 @@ namespace WebAPI.Services
             return users.Select(x => _mapper.Map<UserDto>(x));
         }
 
-        public async Task<UserDto> GetUserDto(int id)
+        public async Task<UserDto> GetUserDtoAsync(int id)
         {
             var user = await _userRepository.GetUserWithWorkAsync(id);
             return _mapper.Map<UserDto>(user);

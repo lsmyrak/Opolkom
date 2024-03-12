@@ -23,9 +23,9 @@ namespace WebAPI.Controllers.Settlements
         }
 
         [HttpPatch("by-date")]
-        public async Task Settlemnet(int idUser, DateOnly startDate, DateOnly stopDate)
+        public async Task Settlemnet(int idUser, DateOnly startDate, DateOnly endDate)
         {
-            throw new NotImplementedException("haha");
+            await _mediator.Send(new SettlementByScopeDateCommand(idUser, startDate, endDate));
         }
 
         [HttpPatch("by-month")]

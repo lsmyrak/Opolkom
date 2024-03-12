@@ -4,6 +4,6 @@ namespace WebAPI.Repositoryes
 {
     public interface IRoleRepository
     {
-        public Task<Role> GetRoleByNameAsync(string roleName);
+        public Task<Role> GetRole(string roleName);
     }
 }

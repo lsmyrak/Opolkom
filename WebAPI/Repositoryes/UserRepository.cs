@@ -16,7 +16,7 @@ namespace WebAPI.Repositoryes
             return await _context.Users.Include(r => r.UserRole).Where(x => x.IsActive).ToListAsync();
         }
 
-        public async Task<User> GetUserByEmailAsync(string email)
+        public async Task<User> GetUserAsync(string email)
         {
             var user = await _context.Users.Include(r => r.UserRole).SingleOrDefaultAsync(x => x.Email.Equals(email) && x.IsActive);
             if (user == null)
@@ -61,7 +61,7 @@ namespace WebAPI.Repositoryes
             await _context.SaveChangesAsync();
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<User> GetUserAsync(int id)
         {
             return await _context.Users.Include(p => p.Works.Where(c => c.IsActive)).SingleOrDefaultAsync(x => x.Id == id && x.IsActive);
         }

@@ -7,12 +7,12 @@ namespace WebAPI.Services
     {
         //Gets ..
         public Task<IEnumerable<UserDto>> GetUsersDtoAsync();
+        public Task<IEnumerable<UserWorkDto>> GetUsersWithWorksAsync();
 
-        public Task<UserDto> GetUserDto(int id);
+        public Task<UserDto> GetUserDtoAsync(int id);
 
         public Task<UserWorkDto> GetUserDtoWithWorksAsync(int id);
 
-        public Task<IEnumerable<UserWorkDto>> GetUsersWithWorksAsync();
 
         //Add Work
         public Task AddWorkToUser(WorkDto workDto);
