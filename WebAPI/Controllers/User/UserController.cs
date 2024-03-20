@@ -21,15 +21,21 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("get-self")]
-    public async Task<UserWorkOnlyCalcDto> GetSelfUser()
+    public async Task<UserWorkOnlyCalcDto> GetSelf()
     {
-        return await _mediator.Send(new GetSelfUserOnlyCalcQuery());
+        return await _mediator.Send(new GetSelfOnlyCalcQuery());
     }
 
-    [HttpGet("get-user-work")]
+    [HttpGet("get-works")]
     public async Task<UserWorkDto> GetUserWork()
     {
         return await _mediator.Send(new GetUserWorkQuery());
+    }
+
+    [HttpGet("get-work-by-date")]
+    public async Task<UserWorkDto> GetWorkByDate(DateOnly startDate, DateOnly endDate)
+    {
+        return await _mediator.Send(new GetUserWorkByScopeDate(startDate, endDate) );
     }
 
     [HttpPost("add-task")]
